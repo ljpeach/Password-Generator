@@ -22,6 +22,9 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+//Store user preferences
+var passReqs = [8, false, false, false, false];//length, lower, upper, num, symbols
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -33,3 +36,12 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+//Use confirm to get user preferences
+function getPreferences() { }
+
+//Generates password based on preferences
+function generatePassword() { }
+
+//Use to shuffle midstage password
+function shuffle() { }
