@@ -24,6 +24,8 @@ var generateBtn = document.querySelector("#generate");
 
 //Store user preferences
 var passReqs = [8, false, false, false, false];//length, lower, upper, num, symbols
+passReqs = [25, true, true, true, true];//temp for testing generate password
+
 
 // Write password to the #password input
 function writePassword() {
@@ -41,7 +43,44 @@ generateBtn.addEventListener("click", writePassword);
 function getPreferences() { }
 
 //Generates password based on preferences
-function generatePassword() { }
+function generatePassword() {
+  var symChars = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";//len 33
+  var alphaChars = "abcdefghijklmnopqrstuvwxyz";//len 26
+  var numChars = "0123456789";//len 10
+  var charBank = [];
+  var remainingChars = passReqs[0];
+  var pass = "";
+  //TODO: Encapsulate in function
+  //Add character to password from each required section,
+  //then add section to bank of available characters.
+  if (passReqs[1]) {
+    charBank = charBank.concat(alphaChars.split(""));
+    pass += alphaChars[Math.floor(Math.random() * alphaChars.length)];
+    remainingChars--;
+  }
+  if (passReqs[2]) {
+    charBank = charBank.concat(alphaChars.toUpperCase().split(""));
+    pass += alphaChars.toUpperCase()[Math.floor(Math.random() * alphaChars.length)];
+    remainingChars--;
+  }
+  if (passReqs[3]) {
+    charBank = charBank.concat(numChars.split(""));
+    pass += numChars[Math.floor(Math.random() * numChars.length)];
+    remainingChars--;
+  }
+  if (passReqs[4]) {
+    charBank = charBank.concat(symChars.split(""));
+    pass += symChars[Math.floor(Math.random() * symChars.length)];
+    remainingChars--;
+  }
+
+  for (remainingChars; remainingChars > 0; remainingChars--) {
+    console.log(charBank);
+    pass += charBank[Math.floor(Math.random() * charBank.length)];
+  }
+
+  return shuffle(pass);
+}
 
 //Use to shuffle midstage password
 function shuffle(shuffleStr) {
