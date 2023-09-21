@@ -108,11 +108,17 @@ function generatePassword() {
   for (remainingChars; remainingChars > 0; remainingChars--) {
     pass += charBank[Math.floor(Math.random() * charBank.length)];
   }
-  // console.log(charBank);
   return shuffle(pass);
 }
 
 //Use to shuffle midstage password
 function shuffle(shuffleStr) {
-  return shuffleStr
+  shuffled = shuffleStr.split('');
+  for (var i = 0; i < shuffled.length; i++) {
+    sourceIndex = Math.floor(Math.random() * shuffled.length);
+    tempValue = shuffled[sourceIndex];
+    shuffled[sourceIndex] = shuffled[i];
+    shuffled[i] = tempValue;
+  }
+  return shuffled.join('');
 }
