@@ -44,4 +44,6 @@ function getPreferences() { }
 function generatePassword() { }
 
 //Use to shuffle midstage password
-function shuffle() { }
+function shuffle(shuffleStr) {
+  return shuffleStr
+}
