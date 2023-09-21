@@ -81,30 +81,25 @@ function generatePassword() {
   var charBank = [];
   var remainingChars = passReqs[0];
   var pass = "";
-  //TODO: Encapsulate in function
   //Add character to password from each required section,
   //then add section to bank of available characters.
-  if (passReqs[1]) {
-    charBank = charBank.concat(alphaChars.split(""));
-    pass += alphaChars[Math.floor(Math.random() * alphaChars.length)];
+  var processReq = function (arr) {
+    charBank = charBank.concat(arr.split(""));
+    pass += arr[Math.floor(Math.random() * arr.length)];
     remainingChars--;
+  };
+  if (passReqs[1]) {
+    processReq(alphaChars);
   }
   if (passReqs[2]) {
-    charBank = charBank.concat(alphaChars.toUpperCase().split(""));
-    pass += alphaChars.toUpperCase()[Math.floor(Math.random() * alphaChars.length)];
-    remainingChars--;
+    processReq(alphaChars.toUpperCase());
   }
   if (passReqs[3]) {
-    charBank = charBank.concat(numChars.split(""));
-    pass += numChars[Math.floor(Math.random() * numChars.length)];
-    remainingChars--;
+    processReq(numChars);
   }
   if (passReqs[4]) {
-    charBank = charBank.concat(symChars.split(""));
-    pass += symChars[Math.floor(Math.random() * symChars.length)];
-    remainingChars--;
+    processReq(symChars);
   }
-
   for (remainingChars; remainingChars > 0; remainingChars--) {
     pass += charBank[Math.floor(Math.random() * charBank.length)];
   }
