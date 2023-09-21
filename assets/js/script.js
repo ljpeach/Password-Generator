@@ -63,9 +63,9 @@ function getPreferences() {
   while (!isValid) {
     isValid = true;
     passReqs[1] = confirm("Would you like to include lower case characters in your password?");
-    passReqs[2] = confirm("Would you like to include upper case cahracters in your password?");
-    passReqs[3] = confirm("Would you like to include numbers in your password?");
-    passReqs[4] = confirm("Would you like to include symbols in your password?");
+    passReqs[2] = confirm("Would you like to include upper case characters in your password?");
+    passReqs[3] = confirm("Would you like to include numeric characters in your password?");
+    passReqs[4] = confirm("Would you like to include special characters in your password?");
     if (!(passReqs[1] || passReqs[2] || passReqs[3] || passReqs[4])) {
       alert("Invalid input. Must include at least one character set.");
       isValid = false;
