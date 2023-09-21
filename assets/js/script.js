@@ -24,11 +24,11 @@ var generateBtn = document.querySelector("#generate");
 
 //Store user preferences
 var passReqs = [8, false, false, false, false];//length, lower, upper, num, symbols
-passReqs = [25, true, true, true, true];//temp for testing generate password
 
 
 // Write password to the #password input
 function writePassword() {
+  getPreferences();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -40,7 +40,38 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 //Use confirm to get user preferences
-function getPreferences() { }
+function getPreferences() {
+  var isValid = false;
+  var errorMessage = "Invalid input. Must be number between 8-128.";
+  var numRequest = 8;
+  //get valid length
+  while (!isValid) {
+    numRequest = prompt("How many characters long do you want your password to be?\nMust be between 8-128 characters.");
+    if (numRequest == null || isNaN(numRequest)) {
+      alert(errorMessage);
+      continue;
+    }
+    numRequest = Number(numRequest);
+    if (numRequest < 8 || numRequest > 128) {
+      alert(errorMessage);
+      continue;
+    }
+    passReqs[0] = numRequest;
+    isValid = true;
+  }
+  isValid = false;
+  while (!isValid) {
+    isValid = true;
+    passReqs[1] = confirm("Would you like to include lower case characters in your password?");
+    passReqs[2] = confirm("Would you like to include upper case cahracters in your password?");
+    passReqs[3] = confirm("Would you like to include numbers in your password?");
+    passReqs[4] = confirm("Would you like to include symbols in your password?");
+    if (!(passReqs[1] || passReqs[2] || passReqs[3] || passReqs[4])) {
+      alert("Invalid input. Must include at least one character set.");
+      isValid = false;
+    }
+  }
+}
 
 //Generates password based on preferences
 function generatePassword() {
@@ -75,10 +106,9 @@ function generatePassword() {
   }
 
   for (remainingChars; remainingChars > 0; remainingChars--) {
-    console.log(charBank);
     pass += charBank[Math.floor(Math.random() * charBank.length)];
   }
-
+  // console.log(charBank);
   return shuffle(pass);
 }
 
